@@ -11,9 +11,9 @@ final class HistoryCell: UITableViewCell {
     
     private let weightLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 22, weight: .regular)
-        label.text = "Вес"
-        label.textColor = .darkGrayTeritary
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.text = "58,5 кг"
+        label.textColor = .blackPrimary
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -21,16 +21,16 @@ final class HistoryCell: UITableViewCell {
     private let changesLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        label.text = "Изменения"
-        label.textColor = .darkGrayTeritary
+        label.text = "-0,5 кг"
+        label.textColor = .darkGraySecondary
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let dateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
-        label.text = "Дата"
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.text = "2 мар"
         label.textColor = .darkGrayTeritary
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -39,21 +39,17 @@ final class HistoryCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = .lightGray
+        backgroundColor = .white
         clipsToBounds = true
         addSubviews()
         
         NSLayoutConstraint.activate([
             weightLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            weightLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            changesLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            changesLabel.topAnchor.constraint(equalTo: topAnchor),
-            changesLabel.widthAnchor.constraint(equalToConstant: 131),
-            changesLabel.heightAnchor.constraint(equalToConstant: 82),
-            dateLabel.leadingAnchor.constraint(equalTo: changesLabel.leadingAnchor),
-            dateLabel.topAnchor.constraint(equalTo: changesLabel.bottomAnchor, constant: 6),
-            dateLabel.bottomAnchor.constraint(equalTo: changesLabel.bottomAnchor),
-            dateLabel.leadingAnchor.constraint(equalTo: changesLabel.trailingAnchor, constant: 8)
+            weightLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            changesLabel.leadingAnchor.constraint(equalTo: weightLabel.trailingAnchor, constant: 8),
+            changesLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            dateLabel.leadingAnchor.constraint(equalTo: changesLabel.trailingAnchor, constant: 8),
+            dateLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     

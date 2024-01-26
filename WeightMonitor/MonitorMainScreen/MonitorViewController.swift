@@ -49,8 +49,8 @@ final class MonitorViewController: UIViewController {
             currentWeightTableView.heightAnchor.constraint(equalToConstant: 129),
             historyTableView.topAnchor.constraint(equalTo: currentWeightTableView.bottomAnchor, constant: 16),
             historyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            historyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 16),
-            currentWeightTableView.heightAnchor.constraint(equalToConstant: 129)
+            historyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            historyTableView.heightAnchor.constraint(equalToConstant: 500)
         ])
         
     }
