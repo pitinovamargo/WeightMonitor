@@ -92,12 +92,12 @@ final class CurrentWeightCell: UITableViewCell {
     }
     
     func addSubviews() {
-        addSubview(titleLabel)
-        addSubview(weightImage)
-        addSubview(currentWeightLabel)
-        addSubview(changeWeightLabel)
-        addSubview(metricSistemLabel)
-        addSubview(switchMetricSistem)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(weightImage)
+        contentView.addSubview(currentWeightLabel)
+        contentView.addSubview(changeWeightLabel)
+        contentView.addSubview(metricSistemLabel)
+        contentView.addSubview(switchMetricSistem)
     }
     
     @objc private func switchTapped(_ sender: UISwitch) {
