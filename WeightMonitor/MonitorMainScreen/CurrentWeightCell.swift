@@ -9,6 +9,8 @@ import UIKit
 
 final class CurrentWeightCell: UITableViewCell {
     
+    var selectedMetricSystem: Bool = false
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
@@ -94,12 +96,22 @@ final class CurrentWeightCell: UITableViewCell {
         addSubview(weightImage)
         addSubview(currentWeightLabel)
         addSubview(changeWeightLabel)
-        addSubview(switchMetricSistem)
         addSubview(metricSistemLabel)
+        addSubview(switchMetricSistem)
     }
     
     @objc private func switchTapped(_ sender: UISwitch) {
-//        self.selectedDay = sender.isOn
+        self.selectedMetricSystem = sender.isOn
+        print("Switch is ON")
+
+//        if sender.isOn {
+//                // Выполните действия, когда переключатель включен
+//                print("Switch is ON")
+//            } else {
+//                // Выполните действия, когда переключатель выключен
+//                print("Switch is OFF")
+//            }
+//
     }
     
 //    func update(with title: String) {

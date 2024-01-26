@@ -89,6 +89,13 @@ extension MonitorViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if tableView ==  currentWeightTableView {
+//            tableView.deselectRow(at: indexPath, animated: true)
+//        } else {
+//            return
+//        }
+        
+        
         //        if indexPath.row == 0 {
         //            let addCategoryViewController = CategoryViewController()
         //            addCategoryViewController.viewModel.$selectedCategory.bind { [weak self] category in
@@ -145,6 +152,8 @@ extension MonitorViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
+//        cell.isUserInteractionEnabled = false
+
         return cell
     }
     
