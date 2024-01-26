@@ -8,8 +8,9 @@
 import UIKit
 
 extension UIColor {
-    static var black: UIColor { UIColor(named: "Text&elements primary") ?? UIColor.black}
-    static var darkGray: UIColor { UIColor(named: "Text&elements teritary") ?? UIColor.darkGray }
+    static var blackPrimary: UIColor { UIColor(named: "Text&elements primary") ?? UIColor.black}
+    static var darkGrayTeritary: UIColor { UIColor(named: "Text&elements teritary") ?? UIColor.darkGray }
+    static var darkGraySecondary: UIColor { UIColor(named: "Text&elements secondary") ?? UIColor.darkGray }
     static var lightGray: UIColor { UIColor(named: "General Gray") ?? UIColor.lightGray }
     static var accentBlue: UIColor { UIColor(named: "AccentBlue") ?? UIColor.blue }
 }

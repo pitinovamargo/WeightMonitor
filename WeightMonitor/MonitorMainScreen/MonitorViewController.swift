@@ -8,14 +8,15 @@
 import UIKit
 
 final class MonitorViewController: UIViewController {
-
-    let cellReuseIdentifier = "MonitorViewController"
+    
+    let currentWeightIndentifire = "currentWeightIndentifire"
+    let historyIndentifire = "historyIndentifire"
     
     private let header: UILabel = {
         let header = UILabel()
         header.translatesAutoresizingMaskIntoConstraints = false
         header.text = "Монитор веса"
-        header.textColor = .black
+        header.textColor = .blackPrimary
         header.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         return header
     }()
@@ -26,10 +27,17 @@ final class MonitorViewController: UIViewController {
         return currentWeightTableView
     }()
     
+    private let historyTableView: UITableView = {
+        let historyTableView = UITableView()
+        historyTableView.translatesAutoresizingMaskIntoConstraints = false
+        return historyTableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
         setupCurrentWeightTableView()
+        setupHistoryTableView()
         view.backgroundColor = .white
         
         NSLayoutConstraint.activate([
@@ -38,30 +46,34 @@ final class MonitorViewController: UIViewController {
             currentWeightTableView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: 24),
             currentWeightTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             currentWeightTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            currentWeightTableView.heightAnchor.constraint(equalToConstant: 150),
-            ])
-
+            currentWeightTableView.heightAnchor.constraint(equalToConstant: 129),
+            historyTableView.topAnchor.constraint(equalTo: currentWeightTableView.bottomAnchor, constant: 16),
+            historyTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            historyTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 16),
+            currentWeightTableView.heightAnchor.constraint(equalToConstant: 129)
+        ])
+        
     }
-
+    
     private func addSubviews() {
         view.addSubview(header)
         view.addSubview(currentWeightTableView)
-//        view.addSubview(searchTrackers)
-//        view.addSubview(datePicker)
-//        view.addSubview(emptyTrackersLogo)
-//        view.addSubview(emptyTrackersText)
-//        view.addSubview(emptySearch)
-//        view.addSubview(emptySearchText)
-//        view.addSubview(collectionView)
-//        view.addSubview(filtersButton)
+        view.addSubview(historyTableView)
     }
     
     private func setupCurrentWeightTableView() {
         currentWeightTableView.delegate = self
         currentWeightTableView.dataSource = self
-        currentWeightTableView.register(CurrentWeightCell.self, forCellReuseIdentifier: cellReuseIdentifier)
-        currentWeightTableView.layer.cornerRadius = 16
-//        currentWeightTableView.separatorStyle = .none
+        currentWeightTableView.register(CurrentWeightCell.self, forCellReuseIdentifier: currentWeightIndentifire)
+        currentWeightTableView.layer.cornerRadius = 12
+        currentWeightTableView.separatorStyle = .none
+    }
+    
+    private func setupHistoryTableView() {
+        historyTableView.delegate = self
+        historyTableView.dataSource = self
+        historyTableView.register(HistoryCell.self, forCellReuseIdentifier: historyIndentifire)
+        historyTableView.separatorStyle = .none
     }
 }
 
@@ -69,77 +81,72 @@ final class MonitorViewController: UIViewController {
 // MARK: - UITableViewDelegate
 extension MonitorViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        if tableView == currentWeightTableView {
+            return 129
+        } else {
+            return 46
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.row == 0 {
-//            let addCategoryViewController = CategoryViewController()
-//            addCategoryViewController.viewModel.$selectedCategory.bind { [weak self] category in
-//                self?.selectedCategory = category
-//                self?.trackersTableView.reloadData()
-//            }
-//            present(addCategoryViewController, animated: true, completion: nil)
-//        } else if indexPath.row == 1 {
-//            let scheduleViewController = ScheduleViewController()
-//            scheduleViewController.createTrackerViewController = self
-//            present(scheduleViewController, animated: true, completion: nil)
-//            selectedDays = []
-//        }
-//        trackersTableView.deselectRow(at: indexPath, animated: true)
+        //        if indexPath.row == 0 {
+        //            let addCategoryViewController = CategoryViewController()
+        //            addCategoryViewController.viewModel.$selectedCategory.bind { [weak self] category in
+        //                self?.selectedCategory = category
+        //                self?.trackersTableView.reloadData()
+        //            }
+        //            present(addCategoryViewController, animated: true, completion: nil)
+        //        } else if indexPath.row == 1 {
+        //            let scheduleViewController = ScheduleViewController()
+        //            scheduleViewController.createTrackerViewController = self
+        //            present(scheduleViewController, animated: true, completion: nil)
+        //            selectedDays = []
+        //        }
+        //        trackersTableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let separatorInset: CGFloat = 16
-//        let separatorWidth = tableView.bounds.width - separatorInset * 2
-//        let separatorHeight: CGFloat = 1.0
-//        let separatorX = separatorInset
-//        let separatorY = cell.frame.height - separatorHeight
-//
-//        let isLastCell = indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
-//
-//        if !isLastCell {
-//            let separatorView = UIView(frame: CGRect(x: separatorX, y: separatorY, width: separatorWidth, height: separatorHeight))
-//            separatorView.backgroundColor = .ypGray
-//            cell.addSubview(separatorView)
-//        }
+        //        let separatorInset: CGFloat = 16
+        //        let separatorWidth = tableView.bounds.width - separatorInset * 2
+        //        let separatorHeight: CGFloat = 1.0
+        //        let separatorX = separatorInset
+        //        let separatorY = cell.frame.height - separatorHeight
+        //
+        //        let isLastCell = indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
+        //
+        //        if !isLastCell {
+        //            let separatorView = UIView(frame: CGRect(x: separatorX, y: separatorY, width: separatorWidth, height: separatorHeight))
+        //            separatorView.backgroundColor = .ypGray
+        //            cell.addSubview(separatorView)
+        //        }
     }
 }
 
 // MARK: - UITableViewDataSource
 extension MonitorViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if tableView == currentWeightTableView {
+            return 1
+        } else {
+            return 10
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? CurrentWeightCell else { return UITableViewCell() }
-
-//        if indexPath.row == 0 {
-//            var title = "Категория"
-//            if let selectedCategory = selectedCategory?.header {
-//                title += "\n" + selectedCategory
-//            }
-//            cell.update(with: title)
-//        } else if indexPath.row == 1 {
-//            var subtitle = ""
-//
-//            if !selectedDays.isEmpty {
-//                if selectedDays.count == 7 {
-//                    subtitle = "Каждый день"
-//                } else {
-//                    subtitle = selectedDays.map { $0.shortName }.joined(separator: ", ")
-//                }
-//            }
-//
-//            if !subtitle.isEmpty {
-//                cell.update(with: "Расписание\n" + subtitle)
-//            } else {
-//                cell.update(with: "Расписание")
-//            }
-//        }
+        var cellReuseIdentifier = ""
+        
+        if tableView == currentWeightTableView {
+            cellReuseIdentifier = currentWeightIndentifire
+        } else if tableView == historyTableView {
+            cellReuseIdentifier = historyIndentifire
+        }
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath) as? CurrentWeightCell else {
+            return UITableViewCell()
+        }
         
         return cell
     }
+    
 }
 

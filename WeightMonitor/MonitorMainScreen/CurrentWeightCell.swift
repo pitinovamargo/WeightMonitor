@@ -13,7 +13,42 @@ final class CurrentWeightCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 13, weight: .medium)
         label.text = "Текущий вес"
-        label.textColor = .darkGray
+        label.textColor = .darkGrayTeritary
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let currentWeightLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 22, weight: .regular)
+        label.text = "58,5 кг"
+        label.textColor = .blackPrimary
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let changeWeightLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        label.text = "-0,5 кг"
+        label.textColor = .darkGraySecondary
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var switchMetricSistem: UISwitch = {
+        let switchMetricSistem = UISwitch()
+        switchMetricSistem.onTintColor = UIColor.accentBlue
+        switchMetricSistem.translatesAutoresizingMaskIntoConstraints = false
+        switchMetricSistem.addTarget(self, action: #selector(switchTapped), for: .touchUpInside)
+        return switchMetricSistem
+    }()
+    
+    private let metricSistemLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.text = "Метрическая система"
+        label.textColor = .blackPrimary
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -21,7 +56,6 @@ final class CurrentWeightCell: UITableViewCell {
     private let weightImage: UIImageView = {
         let weightImage = UIImageView()
         weightImage.image = UIImage(named: "weight")
-        weightImage.tintColor = .gray
         weightImage.translatesAutoresizingMaskIntoConstraints = false
         return weightImage
     }()
@@ -31,22 +65,41 @@ final class CurrentWeightCell: UITableViewCell {
         
         backgroundColor = .lightGray
         clipsToBounds = true
-        
-        addSubview(titleLabel)
-//        addSubview(chevronImage)
+        addSubviews()
         
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-//            chevronImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-//            chevronImage.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            chevronImage.widthAnchor.constraint(equalToConstant: 24),
-//            chevronImage.heightAnchor.constraint(equalToConstant: 24)
+            weightImage.trailingAnchor.constraint(equalTo: trailingAnchor),
+            weightImage.topAnchor.constraint(equalTo: topAnchor),
+            weightImage.widthAnchor.constraint(equalToConstant: 131),
+            weightImage.heightAnchor.constraint(equalToConstant: 82),
+            currentWeightLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            currentWeightLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 6),
+            changeWeightLabel.bottomAnchor.constraint(equalTo: currentWeightLabel.bottomAnchor),
+            changeWeightLabel.leadingAnchor.constraint(equalTo: currentWeightLabel.trailingAnchor, constant: 8),
+            switchMetricSistem.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            switchMetricSistem.topAnchor.constraint(equalTo: currentWeightLabel.bottomAnchor, constant: 16),
+            metricSistemLabel.centerYAnchor.constraint(equalTo: switchMetricSistem.centerYAnchor),
+            metricSistemLabel.leadingAnchor.constraint(equalTo: switchMetricSistem.trailingAnchor, constant: 16)
         ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addSubviews() {
+        addSubview(titleLabel)
+        addSubview(weightImage)
+        addSubview(currentWeightLabel)
+        addSubview(changeWeightLabel)
+        addSubview(switchMetricSistem)
+        addSubview(metricSistemLabel)
+    }
+    
+    @objc private func switchTapped(_ sender: UISwitch) {
+//        self.selectedDay = sender.isOn
     }
     
 //    func update(with title: String) {
