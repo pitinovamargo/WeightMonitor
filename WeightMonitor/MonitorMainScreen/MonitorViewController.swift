@@ -127,6 +127,31 @@ extension MonitorViewController: UITableViewDelegate {
         //            cell.addSubview(separatorView)
         //        }
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if tableView == historyTableView {
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 24))
+            
+            let titleLabel = UILabel(frame: headerView.bounds)
+            titleLabel.text = "История"
+            titleLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+            titleLabel.textColor = .blackPrimary
+            headerView.addSubview(titleLabel)
+            
+            return headerView
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == historyTableView {
+            return 24
+        } else {
+            return 0
+        }
+    }
+
 }
 
 // MARK: - UITableViewDataSource
@@ -152,8 +177,6 @@ extension MonitorViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-//        cell.isUserInteractionEnabled = false
-
         return cell
     }
     

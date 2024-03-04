@@ -51,7 +51,7 @@ final class HistoryCell: UITableViewCell {
         addSubviews()
         
         NSLayoutConstraint.activate([
-            weightLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            weightLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             weightLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             weightLabel.widthAnchor.constraint(equalToConstant: 116),
             changesLabel.leadingAnchor.constraint(equalTo: weightLabel.trailingAnchor, constant: 8),
